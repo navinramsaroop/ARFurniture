@@ -11,7 +11,8 @@ import {
   Viro3DObject,
   ViroSpotLight,
   ViroAmbientLight,
-  ViroNode
+  ViroNode,
+  ViroButton
 } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
@@ -19,10 +20,13 @@ export default class HelloWorldSceneAR extends Component {
     super();
     this.state = {
       rotation: [0, 0, 0],
-      text: 'VIRO Media',
-      source: [require('./resources/coffee_table/CoffeeTable.obj'), require('./resources/Wood_Bench/Wood_Bench.obj')],
-      material: ['coffee_table', 'wood_bench']
-      current_furniture: 0,
+      text: 'VIRO Media'
+      //  source: [
+      //    require('./resources/coffee_table/CoffeeTable.obj'),
+      //    require('./resources/WoodenWardrobe/Woodenwardrobe.obj')
+      //  ],
+      //  material: ['coffee_table', 'wooden_wardrobe'],
+      //  current_furniture: 0
     };
 
     // bind 'this' to functions
@@ -30,6 +34,7 @@ export default class HelloWorldSceneAR extends Component {
     this._rotate = this._rotate.bind(this);
     this._onInitialized = this._onInitialized.bind(this);
     this._onLoadEnd = this._onLoadEnd.bind(this);
+    this._increment_furniture = this._increment_furniture.bind(this);
   }
 
   render() {
@@ -41,8 +46,12 @@ export default class HelloWorldSceneAR extends Component {
           position={[0, 0, -1]}
           style={styles.helloWorldTextStyle}
         />
-        <ViroButton scale=0.5 source={require("./resources/Icons/Plus-Sign.png")}>
 
+        <ViroButton
+          position={[0, 0, -1]}
+          scale={[0.5, 0.5, 0.5]}
+          source={require('./resources/Icons/Plus-Sign.png')}
+        />
 
         <ViroAmbientLight color={'#aaaaaa'} />
         <ViroSpotLight
@@ -59,8 +68,10 @@ export default class HelloWorldSceneAR extends Component {
           onDrag={() => {}}
         >
           <Viro3DObject
-            source={this.state.source[this.state.current_furniture]}
+            //  source={this.state.source[this.state.current_furniture]}
+            //  materials={[this.state.material[this.state.current_furniture]]}
             materials={['coffee_table']}
+            source={require('./resources/coffee_table/CoffeeTable.obj')}
             position={this.state.position}
             scale={[0.5, 0.5, 0.5]}
             rotation={this.state.rotation}
@@ -85,7 +96,7 @@ export default class HelloWorldSceneAR extends Component {
     }
   }
   _increment_furniture() {
-    this.state.current_furniture = (this.state.current_furniture + 1) % 2
+    this.state.current_furniture = (this.state.current_furniture + 1) % 2;
   }
   _onLoadEnd() {
     console.log('Coffee Table finished initializing');
@@ -96,13 +107,14 @@ export default class HelloWorldSceneAR extends Component {
     });
   }
 }
+
 ViroMaterials.createMaterials({
   coffee_table: {
     diffuseTexture: require('./resources/coffee_table/WoodTexture.jpg')
-  },
-  wood_bench: {
-    diffuseTexture: require('./resources/Wood_Bench/Wood2.jpg')
   }
+  //wooden_wardrobe: {
+  //diffuseTexture: require('./resources/WoodenWardrobe/Wood.jpg')
+  //}
 });
 var styles = StyleSheet.create({
   helloWorldTextStyle: {
