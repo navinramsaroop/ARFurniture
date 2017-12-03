@@ -14,9 +14,11 @@ import {
   View,
   StyleSheet,
   PixelRatio,
-  TouchableHighlight
+  TouchableHighlight,
+  FlatList
 } from 'react-native';
-
+import { ListItem, Separator } from './js/components/ListItem';
+import furniture from './js/data/furniture';
 import { ViroSceneNavigator, ViroARSceneNavigator } from 'react-viro';
 
 /*
@@ -66,16 +68,32 @@ export default class ViroSample extends Component {
   // Presents the user with a choice of an AR or VR experience
   _shoppingcart() {
     return (
-      <View style={localStyles.outer}>
-        <View style={localStyles.inner}>
-          <TouchableHighlight
-            style={localStyles.buttons}
-            onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
-            underlayColor={'#68a0ff'}
-          >
-            <Text style={localStyles.buttonText}>AR</Text>
-          </TouchableHighlight>
-        </View>
+      //<View style={localStyles.outer}>
+      //<View style={localStyles.inner}>
+      //<TouchableHighlight
+      //  style={localStyles.buttons}
+      // onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
+      //  underlayColor={'#68a0ff'}
+      //>
+      //<Text style={localStyles.buttonText}>AR</Text>
+      //</TouchableHighlight>
+      //</View>
+      //  </View>
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={furniture}
+          renderItem={({ item }) => (
+            <ListItem
+              name={item.name}
+              dimensions={item.dimensions}
+              price={item.price}
+              imageurl={item.imageurl}
+              onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
+            />
+          )}
+          keyExtractor={item => item}
+          ItemSeperatorComponent={Separator}
+        />
       </View>
     );
   }
