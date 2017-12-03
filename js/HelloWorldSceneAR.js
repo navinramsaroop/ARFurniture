@@ -23,7 +23,7 @@ export default class HelloWorldSceneAR extends Component {
       text: 'VIRO Media',
       source: [
         require('./resources/coffee_table/CoffeeTable.obj'),
-        require('./resources/RealisticSofa/realisticSofa.obj'),
+        require('./resources/coffee_table/CoffeeTable.obj'),
         require('./resources/coffee_table/CoffeeTable.obj')
       ],
       material: ['coffee_table', 'coffee_table_2', 'coffee_table_3'],
@@ -43,15 +43,15 @@ export default class HelloWorldSceneAR extends Component {
       <ViroARScene onTrackingInitialized={this._onInitialized}>
         <ViroText
           text={this.state.text}
-          scale={[0.5, 0.5, 0.5]}
+          scale={[0.5, 1.5, 0.5]}
           position={[0, 0, -1]}
           style={styles.helloWorldTextStyle}
         />
 
         <ViroButton
           position={[0, 0, -1]}
-          scale={[0.5, 0.5, 0.5]}
-          source={require('./resources/Icons/Plus-Sign.png')}
+          scale={[0.2, 0.2, 0.2]}
+          source={require('./resources/Icons/arrow.png')}
           onClick={this._increment_furniture}
         />
 
@@ -118,7 +118,7 @@ ViroMaterials.createMaterials({
     diffuseTexture: require('./resources/coffee_table/WoodTexture.jpg')
   },
   coffee_table_2: {
-    diffuseTexture: require('./resources/Bed/bluefabric.jpg')
+    diffuseTexture: require('./resources/coffee_table/marble.jpg')
   },
   coffee_table_3: {
     diffuseTexture: require('./resources/Bed/mohagony.jpg')
