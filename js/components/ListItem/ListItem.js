@@ -4,7 +4,7 @@ import { View, Text, TouchableHighlight, Image } from 'react-native';
 import styles from './styles';
 
 const ListItem = ({ name, dimensions, price, imageurl, onPress }) => (
-  <TouchableHighlight onPress={onPress}>
+  <TouchableHighlight onPress={onPress} underlayColor="#D3D3D3">
     <View style={styles.row}>
       <View style={styles.nameView}>
         <Text style={styles.name}>{name}</Text>

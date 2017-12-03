@@ -12,7 +12,8 @@ import {
   ViroSpotLight,
   ViroAmbientLight,
   ViroNode,
-  ViroButton
+  ViroButton,
+  ViroImage
 } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
@@ -21,13 +22,15 @@ export default class HelloWorldSceneAR extends Component {
     this.state = {
       rotation: [0, 0, 0],
       text: 'VIRO Media',
+      logo_source: '',
       source: [
         require('./resources/coffee_table/CoffeeTable.obj'),
         require('./resources/coffee_table/CoffeeTable.obj'),
         require('./resources/coffee_table/CoffeeTable.obj')
       ],
       material: ['coffee_table', 'coffee_table_2', 'coffee_table_3'],
-      current_furniture: 0
+      current_furniture: 0,
+      logo_visibility: true
     };
 
     // bind 'this' to functions
@@ -44,15 +47,25 @@ export default class HelloWorldSceneAR extends Component {
         <ViroText
           text={this.state.text}
           scale={[0.5, 1.5, 0.5]}
-          position={[0, 0, -1]}
+          position={[0, 1, -1]}
           style={styles.helloWorldTextStyle}
         />
-
+        <ViroImage
+          visible={this.state.logo_visibility}
+          height={25}
+          width={25}
+          resizeMove={'scaleToFill'}
+          placeholderSource={require('./resources/Logo.png')}
+          source={{ uri: './resources/Logo.png' }}
+          position={[0, 0, -20]}
+          scale={[0.4, 0.4, 0.4]}
+        />
         <ViroButton
-          position={[0, 0, -1.5]}
+          position={[0, 0, -1]}
           scale={[0.2, 0.2, 0.2]}
           source={require('./resources/Icons/arrow.png')}
           onClick={this._increment_furniture}
+          visible={!this.state.logo_visibility}
         />
 
         <ViroAmbientLight color={'#aaaaaa'} />
@@ -72,8 +85,6 @@ export default class HelloWorldSceneAR extends Component {
           <Viro3DObject
             source={this.state.source[this.state.current_furniture]}
             materials={[this.state.material[this.state.current_furniture]]}
-            //  materials={['coffee_table']}
-            //source={require('./resources/coffee_table/CoffeeTable.obj')}
             position={this.state.position}
             scale={[0.5, 0.5, 0.5]}
             rotation={this.state.rotation}
@@ -108,7 +119,8 @@ export default class HelloWorldSceneAR extends Component {
   }
   _onInitialized() {
     this.setState({
-      text: ''
+      text: '',
+      logo_visibility: false
     });
   }
 }
