@@ -49,7 +49,7 @@ export default class HelloWorldSceneAR extends Component {
         />
 
         <ViroButton
-          position={[0, 0, -1]}
+          position={[0, 0, -1.5]}
           scale={[0.2, 0.2, 0.2]}
           source={require('./resources/Icons/arrow.png')}
           onClick={this._increment_furniture}
